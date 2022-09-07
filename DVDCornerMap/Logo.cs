@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DVD_Corner
+﻿namespace DVD_Corner
 {
-    class Logo
+    internal class Logo
     {
         private int width;
         private int height;
@@ -11,27 +9,33 @@ namespace DVD_Corner
         private int xSpeed;
         private int ySpeed;
 
-        public int Width {
+        public int Width
+        {
             get => width;
             set => width = value;
         }
-        public int Height {
+        public int Height
+        {
             get => height;
             set => height = value;
         }
-        public int X {
+        public int X
+        {
             get => x;
             set => x = value;
         }
-        public int Y {
+        public int Y
+        {
             get => y;
             set => y = value;
         }
-        public int XSpeed {
+        public int XSpeed
+        {
             get => xSpeed;
             set => xSpeed = value;
         }
-        public int YSpeed {
+        public int YSpeed
+        {
             get => ySpeed;
             set => ySpeed = value;
         }
@@ -58,8 +62,6 @@ namespace DVD_Corner
         {
             X += XSpeed;
             Y += YSpeed;
-
-            //Console.WriteLine("X " + X + " | Y " + Y);
         }
     }
 }

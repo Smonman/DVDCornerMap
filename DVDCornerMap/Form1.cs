@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVD_Corner
@@ -25,7 +21,7 @@ namespace DVD_Corner
                 {
                     if (c.GetType() == t && c.Name != "button_cancel")
                     {
-                        c.Invoke((MethodInvoker)(() => c.Enabled = state));
+                        _ = c.Invoke((MethodInvoker)(() => c.Enabled = state));
                     }
 
                     if (c.GetType() == typeof(GroupBox) && !types.Contains(typeof(GroupBox)))
@@ -38,17 +34,17 @@ namespace DVD_Corner
 
         private void SetProgressbar(ProgressBar pb, Label descL, Label percL, int max, string desc)
         {
-            pb.Invoke((MethodInvoker)(() => pb.Maximum = max));
-            pb.Invoke((MethodInvoker)(() => pb.Value = 0));
-            descL.Invoke((MethodInvoker)(() => descL.Text = desc));
-            percL.Invoke((MethodInvoker)(() => percL.Text = string.Format("{0:P4}", 0)));
+            _ = pb.Invoke((MethodInvoker)(() => pb.Maximum = max));
+            _ = pb.Invoke((MethodInvoker)(() => pb.Value = 0));
+            _ = descL.Invoke((MethodInvoker)(() => descL.Text = desc));
+            _ = percL.Invoke((MethodInvoker)(() => percL.Text = string.Format("{0:P4}", 0)));
         }
 
         private void ProgressbarStep(ProgressBar pb, Label percL, int value)
         {
             double p = (double)value / pb.Maximum;
-            pb.Invoke((MethodInvoker)(() => pb.Value = (int)(p * pb.Maximum)));
-            percL.Invoke((MethodInvoker)(() => percL.Text = string.Format("{0:P2}", p)));
+            _ = pb.Invoke((MethodInvoker)(() => pb.Value = (int)(p * pb.Maximum)));
+            _ = percL.Invoke((MethodInvoker)(() => percL.Text = string.Format("{0:P2}", p)));
         }
 
         private void button_simulate_Click(object sender, EventArgs e)
@@ -93,7 +89,7 @@ namespace DVD_Corner
                         break;
                     }
                     d.Logo.SetSpeed(xs, ys);
-                    d.Logo.SetPos(x, y); 
+                    d.Logo.SetPos(x, y);
                     corners[x, y] = d.Simulate(maxC);
                 }
 
@@ -102,7 +98,6 @@ namespace DVD_Corner
                     break;
                 }
 
-                //Console.WriteLine("Simulation: " + (double)x / (d.Width - l.Width) * 100d + "%");
                 ProgressbarStep(progressBar, label_progressbar_percentage, x);
             }
 
@@ -138,7 +133,6 @@ namespace DVD_Corner
                     break;
                 }
 
-                //Console.WriteLine("Blackening: " + (double)x / b.Width * 100d + "%");
                 ProgressbarStep(progressBar, label_progressbar_percentage, x);
             }
 
@@ -165,7 +159,6 @@ namespace DVD_Corner
                         break;
                     }
 
-                    //Console.WriteLine("Bitmap: " + (double)x / brightness.GetLength(0) * 100d + "%");
                     ProgressbarStep(progressBar, label_progressbar_percentage, x);
                 }
 
@@ -175,8 +168,6 @@ namespace DVD_Corner
                 }
 
             }
-            //b.Dispose();
-
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
